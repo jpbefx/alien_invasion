@@ -6,7 +6,7 @@ import sys
 import pygame
 
 class AlienInvasion:
-    """Overal class to manage game assets and behavior."""
+    """Overall class to manage game assets and behavior."""
 
     def __init__(self):
         """Initialize the game, and create game resources."""
@@ -15,7 +15,7 @@ class AlienInvasion:
         self.screen = pygame.display.set_mode((1200, 800))
         pygame.display.set_caption("Alien Invasion")
 
-        #   Ser the background color. (pg 231)
+        #   Set the background color. (pg 231)
         self.bg_color = (230, 230, 230)
 
     def run_game(self):
@@ -33,7 +33,7 @@ class AlienInvasion:
             pygame.display.flip()
         
 
-    if __name__ == '__main__':
-        #   Make a game instance, and run the game.
-        ai = AlienInvasion()
-        ai.run_game()
+if __name__ == '__main__':
+    #   Make a game instance, and run the game.
+    ai = AlienInvasion()
+    ai.run_game()
