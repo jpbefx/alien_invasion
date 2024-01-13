@@ -29,9 +29,10 @@ class AlienInvasion:
     def run_game(self):
         """Start the main loop for the game."""
         while True:
-            self._check_events()
+            self._check_events() # Pg. 236
     
-    def _check_events(self):
+    ### Book has incorrect placement of ""#Redraw the screen during each pass through the loop."" snippet. ###
+    def _check_events(self): # Pg. 237
         """Respond to keyboard and mouse events."""
         #   Watch for keyboard and mouse events.
         for event in pygame.event.get():
