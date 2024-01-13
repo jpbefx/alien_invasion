@@ -8,6 +8,9 @@ import pygame
 #   Adding settings.py to access instance of Settings (pg. 232)
 from settings import Settings
 
+#   Adding the Ship class from the ship.py module
+from ship import Ship
+
 class AlienInvasion:
     """Overall class to manage game assets and behavior."""
 
