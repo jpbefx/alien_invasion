@@ -30,6 +30,7 @@ class AlienInvasion:
         """Start the main loop for the game."""
         while True:
             self._check_events() # Pg. 236
+            self._update_screen() # Pg. 237
     
     ### Book has incorrect placement of ""#Redraw the screen during each pass through the loop."" snippet. ###
     def _check_events(self): # Pg. 237
@@ -38,13 +39,14 @@ class AlienInvasion:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
-
-            #   Redraw the screen during each pass through the loop. (pg 231)
-            self.screen.fill(self.settings.bg_color)
-            self.ship.blitme()
-
-            #   Make the most recently drawn screen visible.
-            pygame.display.flip()
+                
+    def _update_screen(self): # Pg. 237
+        """Update images on the screen, and flip to the new screen."""
+        #   Redraw the screen during each pass through the loop. (pg 231)
+        self.screen.fill(self.settings.bg_color)
+        self.ship.blitme()
+        #   Make the most recently drawn screen visible.
+        pygame.display.flip()
         
 
 if __name__ == '__main__':
