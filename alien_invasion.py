@@ -31,6 +31,7 @@ class AlienInvasion:
         while True:
             self._check_events() # Pg. 236
             self._update_screen() # Pg. 237
+            self.ship.update()
     
     ### Book has incorrect placement of ""#Redraw the screen during each pass through the loop."" snippet. ###
     def _check_events(self): # Pg. 237
@@ -41,6 +42,15 @@ class AlienInvasion:
                 sys.exit()
             elif event.type == pygame.KEYDOWN: # Pg. 238
                 if event.key == pygame.K_RIGHT:
+                    self.ship.moving_right = True # Pg. 239
+                elif event.key == pygame.K_LEFT:    # Pg. 241
+                    self.ship.moving_left = True
+
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_RIGHT:
+                    self.ship.moving_right = False
+                elif event.key == pygame.K_LEFT:        # Pg. 241
+                    self.ship.moving_left = False
                     # Move the ship to the right.
                     self.ship.rect.x += 1    
     def _update_screen(self): # Pg. 237
