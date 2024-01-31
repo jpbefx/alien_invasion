@@ -41,18 +41,29 @@ class AlienInvasion:
             if event.type == pygame.QUIT:
                 sys.exit()
             elif event.type == pygame.KEYDOWN: # Pg. 238
-                if event.key == pygame.K_RIGHT:
-                    self.ship.moving_right = True # Pg. 239
-                elif event.key == pygame.K_LEFT:    # Pg. 241
-                    self.ship.moving_left = True
-
+                self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_RIGHT:
-                    self.ship.moving_right = False
-                elif event.key == pygame.K_LEFT:        # Pg. 241
-                    self.ship.moving_left = False
-                    # Move the ship to the right.
-                    self.ship.rect.x += 1    
+                self._check_keyup_events(event)
+
+                # Move the ship to the right.
+                # Deprecated // self.ship.rect.x += 1 
+                    # Movement value now located in Settings.py as ship_speed
+                
+    # Refactoring Key Events Pg. 244
+    def _check_keydown_events(self, event):
+        if event.key == pygame.K_RIGHT:
+            self.ship.moving_right = True # Pg. 239
+        elif event.key == pygame.K_LEFT:    # Pg. 241
+            self.ship.moving_left = True
+
+    def _check_keyup_events(self, event):
+        if event.key == pygame.K_RIGHT:
+            self.ship.moving_right = False
+        elif event.key == pygame.K_LEFT:        # Pg. 241
+            self.ship.moving_left = False
+
+
+
     def _update_screen(self): # Pg. 237
         """Update images on the screen, and flip to the new screen."""
         #   Redraw the screen during each pass through the loop. (pg 231)
