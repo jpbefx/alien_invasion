@@ -51,12 +51,16 @@ class AlienInvasion:
                 
     # Refactoring Key Events Pg. 244
     def _check_keydown_events(self, event):
+        """Respond to keypresses."""
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = True # Pg. 239
         elif event.key == pygame.K_LEFT:    # Pg. 241
             self.ship.moving_left = True
+        elif event.key == pygame.K_q: # pg. 244 Exit Game with 'Q'
+            sys.exit()
 
     def _check_keyup_events(self, event):
+        """REspond to keyreleases."""
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = False
         elif event.key == pygame.K_LEFT:        # Pg. 241
