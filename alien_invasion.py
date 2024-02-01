@@ -26,7 +26,7 @@ class AlienInvasion:
         self.settings.screen_width = self.screen.get_rect().width # rect = new screen rectangle size
         self.settings.screen_height = self.screen.get_rect().height
         
-        pygame.display.set_caption("Alien Invasion")
+        pygame.display.set_caption("Alien Invasion")        #("Alien Invasion", f"{self.settings.screen_width}, {self.settings.screen_height}")
 
         self.ship = Ship(self)
         

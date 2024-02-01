@@ -12,4 +12,11 @@ class Settings:
         self.bg_color = (230, 230, 230)
 
         # Ship settings
-        self.ship_speed = 1.5 # Pg. 242
+        self.ship_speed = 6 # Pg. 242
+
+
+        ## TESTING VARIABLE SHIP_SPEED ON MY OWN: FAIL
+#        if self.screen_width >= 1250:
+#                self.ship_speed = 6
+#        elif self.screen_width <= 1200:
+#                self.ship_speed = 1.5
