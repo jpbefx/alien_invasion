@@ -29,6 +29,9 @@ class AlienInvasion:
         pygame.display.set_caption("Alien Invasion")        #("Alien Invasion", f"{self.settings.screen_width}, {self.settings.screen_height}")
 
         self.ship = Ship(self)
+
+        # Adding Sprite Group to hold fired bullets Pg. 248
+        self.bullets = pygame.sprite.Group()
         
     def run_game(self):
         """Start the main loop for the game."""

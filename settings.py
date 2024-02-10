@@ -14,6 +14,12 @@ class Settings:
         # Ship settings
         self.ship_speed = 6 # Pg. 242
 
+        # Bullet Settings Pg. 247
+        self.bullet_speed = 1.0
+        self.bullet_width = 3
+        self.bullet_height = 15
+        self.bullet_color = (60, 60, 60)
+
 
         ## TESTING VARIABLE SHIP_SPEED ON MY OWN: FAIL
 #        if self.screen_width >= 1250:
