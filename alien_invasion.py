@@ -11,6 +11,9 @@ from settings import Settings
 #   Adding the Ship class from the ship.py module
 from ship import Ship
 
+#   Adding the Bullet class from the bullet.py module (pg. 249)
+from bullet import Bullet
+
 class AlienInvasion:
     """Overall class to manage game assets and behavior."""
 
@@ -67,6 +70,8 @@ class AlienInvasion:
             self.ship.moving_left = True
         elif event.key == pygame.K_q: # pg. 244 Exit Game with 'Q'
             sys.exit()
+        elif event.key == pygame.K_SPACE: # Pg. 249 "Firing Bullets"
+            self._fire_bullet()
 
     def _check_keyup_events(self, event):
         """REspond to keyreleases."""
@@ -75,13 +80,19 @@ class AlienInvasion:
         elif event.key == pygame.K_LEFT:        # Pg. 241
             self.ship.moving_left = False
 
-
+    # Creating method to fire bullets from the bullet module
+    def _fire_bullets(self):
+        """Create a new bullet and add it to the bullets group."""
+        new_bullet = Bullet(self)
+        self.bullets.add(new_bullet)
 
     def _update_screen(self): # Pg. 237
         """Update images on the screen, and flip to the new screen."""
         #   Redraw the screen during each pass through the loop. (pg 231)
         self.screen.fill(self.settings.bg_color)
         self.ship.blitme()
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
         #   Make the most recently drawn screen visible.
         pygame.display.flip()
         
