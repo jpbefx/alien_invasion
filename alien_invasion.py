@@ -35,20 +35,25 @@ class AlienInvasion:
 
         # Adding Sprite Group to hold fired bullets Pg. 248
         self.bullets = pygame.sprite.Group()
-        
+    
+    # Adding organization to the code by bringing the oversaturated bullet settings out of run_game()
+        # Pg. 252
+    def _update_bullets(self):
+        """Update position of bullets and get rid of old bullets."""    
+        # Update bullet positions.
+        # Get rid of bullets that have disappeared, Pg. 251
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
+# for testing            print(len(self.bullets))
+
     def run_game(self):
         """Start the main loop for the game."""
         while True:
             self._check_events() # Pg. 236
             self.ship.update() # Pg. 240
             self.bullets.update() # Pg. 249
-            
-            # Get rid of bullets that have disappeared, Pg. 251
-            for bullet in self.bullets.copy():
-                if bullet.rect.bottom <= 0:
-                    self.bullets.remove(bullet)
-# for testing            print(len(self.bullets))
-
+            self._update_bullets() # Pg. 252
             self._update_screen() # Pg. 237
             self.ship.update()
     
