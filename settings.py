@@ -19,6 +19,8 @@ class Settings:
         self.bullet_width = 3
         self.bullet_height = 15
         self.bullet_color = (60, 60, 60)
+        # Limiting the amount of bullets to promote accuracy Pg. 251
+        self.bullets_allowed = 9
 
 
         ## TESTING VARIABLE SHIP_SPEED ON MY OWN: FAIL
