@@ -33,7 +33,7 @@ class AlienInvasion:
         self.bullets = pygame.sprite.Group()    # Adding Sprite Group to hold fired bullets Pg. 248
         self.aliens = pygame.sprite.Group()
 
-        
+        self._create_fleet()
     
     # Adding organization to the code by bringing the oversaturated bullet settings out of run_game()
         # Pg. 252
