@@ -14,6 +14,9 @@ from ship import Ship
 #   Adding the Bullet class from the bullet.py module (pg. 249)
 from bullet import Bullet
 
+#   Adding the Alien class from the alien.py module (pg. 258)
+from alien import Alien
+
 class AlienInvasion:
     """Overall class to manage game assets and behavior."""
 
@@ -22,19 +25,15 @@ class AlienInvasion:
         pygame.init()
         #   Pg (232)
         self.settings = Settings()
-
-#       self.screen = pygame.display.set_mode(
-#            (self.settings.screen_width, self.settings.screen_height)) DEPRECATED ON Pg. 245
         self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
-        self.settings.screen_width = self.screen.get_rect().width # rect = new screen rectangle size
-        self.settings.screen_height = self.screen.get_rect().height
-        
+        self.settings.screen_width = self.screen.get_rect().width   # rect = new screen rectangle size
+        self.settings.screen_height = self.screen.get_rect().height    
         pygame.display.set_caption("Alien Invasion")        #("Alien Invasion", f"{self.settings.screen_width}, {self.settings.screen_height}")
-
         self.ship = Ship(self)
+        self.bullets = pygame.sprite.Group()    # Adding Sprite Group to hold fired bullets Pg. 248
+        self.aliens = pygame.sprite.Group()
 
-        # Adding Sprite Group to hold fired bullets Pg. 248
-        self.bullets = pygame.sprite.Group()
+        
     
     # Adding organization to the code by bringing the oversaturated bullet settings out of run_game()
         # Pg. 252
@@ -46,6 +45,13 @@ class AlienInvasion:
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
 # for testing            print(len(self.bullets))
+                
+    # Adding helpter function to create the aliens group sprites (Pg. 258)
+    def _create_fleet(self):
+        """Create the fleet of aliens."""
+        # Make an alien.
+        alien = Alien(self)
+        self.aliens.add(alien)
 
     def run_game(self):
         """Start the main loop for the game."""
@@ -107,6 +113,8 @@ class AlienInvasion:
         self.ship.blitme()
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
+        # update the aliens sprite and draw to the screen (pg. 259)
+        self.aliens.draw(self.screen)
         #   Make the most recently drawn screen visible.
         pygame.display.flip()
         
