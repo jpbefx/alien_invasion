@@ -2,7 +2,7 @@
 #   Chapter 13 'Python Crash Course' textbook Pg 256-257
 
 import pygame
-from pygame.sprite import _Group, Sprite
+from pygame.sprite import Sprite
 
 class Alien(Sprite):
     """A class to represent a single alien in the fleet."""
