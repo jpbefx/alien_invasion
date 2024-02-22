@@ -51,23 +51,38 @@ class AlienInvasion:
 #        alien = Alien(self)
 #        self.aliens.add(alien)
 
+        # Create the first row of aliens. Pg. 260
+#        alien = Alien(self)
+#        alien_width = alien.rect.width
+#        available_space_x = self.settings.screen_width - (2 * alien_width)
+#        number_aliens_x = available_space_x // (2 * alien_width)
 
+
+#        for alien_number in range(number_aliens_x):
+#            # Create an alien and place it in the row.
+#            alien = Alien(self)
+#            alien.x = alien_width + 2 * alien_width * alien_number
+#            alien.rect.x = alien.x
+#            self.aliens.add(alien)
+
+        # REFACTORING _create_fleet() Pg. 262
     def _create_fleet(self):
         """Create the fleet of aliens."""
-        # Create an alien and find the number of aliens in a row.
-        # Spacing between each alien in equal to one alien width.
+        # Create the first row of aliens.
         alien = Alien(self)
         alien_width = alien.rect.width
         available_space_x = self.settings.screen_width - (2 * alien_width)
         number_aliens_x = available_space_x // (2 * alien_width)
-
-        # Create the first row of aliens.
         for alien_number in range(number_aliens_x):
-            # Create an alien and place it in the row.
-            alien = Alien(self)
-            alien.x = alien_width + 2 * alien_width * alien_number
-            alien.rect.x = alien.x
-            self.aliens.add(alien)
+            self._create_alien(alien_number)
+
+    def _create_alien(self, alien_number):
+        """Create an alien and place it in the row."""
+        alien = Alien(self)
+        alien_width = alien.rect.width
+        alien.x = alien_width + 2 * alien_width * alien_number
+        alien.rect.x = alien.x
+        self.aliens.add(alien)
 
     def run_game(self):
         """Start the main loop for the game."""
