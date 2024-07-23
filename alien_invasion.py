@@ -44,6 +44,11 @@ class AlienInvasion:
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
+
+    def _update_aliens(self):
+        """Update the positions of all aliens in the fleet."""
+        self.aliens.update()
+
 # for testing            print(len(self.bullets))
                 
     # Adding helpter function to create the aliens group sprites (Pg. 258)
@@ -101,6 +106,7 @@ class AlienInvasion:
             self.ship.update() # Pg. 240
             self.bullets.update() # Pg. 249
             self._update_bullets() # Pg. 252
+            self._update_aliens() # Pg. 265
             self._update_screen() # Pg. 237
             self.ship.update()
     
