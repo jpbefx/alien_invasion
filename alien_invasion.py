@@ -1,12 +1,15 @@
 # James Bailey January 11, 2024
 #   Chapter 12 'Python Crash Course' textbook Pg 229.
 
-import sys
+import sys # Pg. 229
+from time import sleep # Pg. 274
 
-import pygame
+import pygame # Pg. 229
 
 #   Adding settings.py to access instance of Settings (pg. 232)
 from settings import Settings
+
+from game_stats import GameStats # Pg. 274
 
 #   Adding the Ship class from the ship.py module
 from ship import Ship
@@ -29,6 +32,10 @@ class AlienInvasion:
         self.settings.screen_width = self.screen.get_rect().width   # rect = new screen rectangle size
         self.settings.screen_height = self.screen.get_rect().height    
         pygame.display.set_caption("Alien Invasion")        #("Alien Invasion", f"{self.settings.screen_width}, {self.settings.screen_height}")
+
+        # Create an instance to store game statistics.
+        self.stats = GameStats(self)
+
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()    # Adding Sprite Group to hold fired bullets Pg. 248
         self.aliens = pygame.sprite.Group()
@@ -44,12 +51,63 @@ class AlienInvasion:
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
+        
+        # add a call to new method _check_bullet_alien_collisions()
+        self._check_bullet_alien_collisions()
+
+    ##  Breaking _update_bullets(self) here and refactoring Pg. 271 ##
+
+    def _check_bullet_alien_collisions(self):
+        """Respond to bullet-alien collisions.""" 
+        # Check to see if any bullets have hit aliens.
+        # If so, get rid of the bullet and the alien.
+        collisions = pygame.sprite.groupcollide(
+            self.bullets, self.aliens, True, True
+        )
+
+        # Check for no aliens in fleet
+        # if not any aliens in fleet, create new fleet
+        if not self.aliens:
+            # Destroy existing bullets and create a new fleet.
+            self.bullets.empty()
+            self._create_fleet()
+
+    # added method to handle gameplay after the ship is hit by aliens Pg. 274
+    def _ship_hit(self):
+        """Respond to the ship being hit by an alien."""
+        ### Added If Else statement and indented all inner code per Game Over! Pg. 276-277
+        if self.stats.ships_left > 0:
+            # Decrement ships_left.
+            self.stats.ships_left -= 1
+
+            # Get rid of any remaining aliens and bullets.
+            self.aliens.empty()
+            self.bullets.empty()
+
+            # Create new fleet and center the ship.
+            self._create_fleet()
+            self.ship.center_ship()
+
+            # Pause game for player ready
+            sleep(0.5)
+        else:
+            self.stats.game_active = False
+
 
     def _update_aliens(self):
         """Check if the fleet is at an edge,
                 then update the positions of all aliens in the fleet."""
         self._check_fleet_edges()
         self.aliens.update()
+
+        # Ending the Game Pg. 272
+        # Loof for alien-ship collisions.
+        if pygame.sprite.spritecollideany(self.ship, self.aliens):
+            print("Ship hit!!!")
+            self._ship_hit()
+
+        # Look for aliens hitting the bottom of the screen. Pg. 276
+        self._check_aliens_bottom()
 
 # for testing            print(len(self.bullets))
                 
@@ -125,6 +183,16 @@ class AlienInvasion:
             self._update_screen() # Pg. 237
             self.ship.update()
     
+    #   Aliens that Reach the Bottom of the Screen Pg. 276
+    def _check_aliens_bottom(self):
+        """Check if any aliens have reached to bottom of the screen."""
+        screen_rect = self.screen.get_rect()
+        for alien in self.aliens.sprites():
+            if alien.rect.bottom >= screen_rect.bottom:
+                #Treat this the same as if the ship got hit.
+                self._ship_hit()
+                break
+
     ### Book has incorrect placement of ""#Redraw the screen during each pass through the loop."" snippet. ###
     def _check_events(self): # Pg. 237
         """Respond to keyboard and mouse events."""

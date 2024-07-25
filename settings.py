@@ -13,6 +13,7 @@ class Settings:
 
         # Ship settings
         self.ship_speed = 6 # Pg. 242
+        self.ship_limit = 3 # Pg. 274
 
         # Alien settings
         self.alien_speed = 1.0
@@ -22,7 +23,7 @@ class Settings:
         
         # Bullet Settings Pg. 247
         self.bullet_speed = 1.0
-        self.bullet_width = 3
+        self.bullet_width = 3000
         self.bullet_height = 15
         self.bullet_color = (60, 60, 60)
         # Limiting the amount of bullets to promote accuracy Pg. 251
